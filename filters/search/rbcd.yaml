@@ -1,0 +1,13 @@
+title: Write on attribut for RBCD
+include_access_masks:
+  - Write Prop
+include_target_object_classes:
+  - computer
+include_object_types:
+  - ms-DS-Allowed-To-Act-On-Behalf-Of-Other-Identity
+  - User-Account-Restrictions
+  - ms-DS-Allowed-To-Delegate-To
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false
+include_self_rights: false

@@ -1,0 +1,7 @@
+title: Full control over an object
+include_access_masks:
+  - Generic All
+  - Write Dacl
+  - Write Owner
+exclude_ace_flags:
+  - Inherit Only

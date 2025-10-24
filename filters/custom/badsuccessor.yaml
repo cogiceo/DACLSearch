@@ -1,0 +1,11 @@
+title: BadSuccessor
+include_access_masks:
+  - Create Child
+include_target_object_classes:
+  - organizationalUnit
+include_object_types:
+  - ms-DS-Delegated-Managed-Service-Account
+  - No value
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false

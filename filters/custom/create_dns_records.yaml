@@ -1,0 +1,11 @@
+title: Create records in ADIDNS zones 
+include_access_masks:
+  - Create Child
+include_target_object_classes:
+  - dnsZone
+include_ace_types:
+  - Allowed
+  - Allowed Object
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false

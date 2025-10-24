@@ -1,0 +1,86 @@
+title: Exclude builtin groups (English names)
+merge: true
+exclude_principal_names:
+  - Access Control Assistance Operators
+  - Account Operators
+  - Administrators
+  - Allowed RODC Password Replication Group
+  - Backup Operators
+  - Certificate Service DCOM Access
+  - Cert Publishers
+  - Cloneable Domain Controllers
+  - Cryptographic Operators
+  - Denied RODC Password Replication Group
+  - Distributed COM Users
+  - DnsUpdateProxy
+  - DnsAdmins
+  - Domain Admins
+  - Domain Computers
+  - Domain Controllers
+  - Domain Guests
+  - Domain Users
+  - Enterprise Admins
+  - Enterprise Key Admins
+  - Enterprise Read-only Domain Controllers
+  - Event Log Readers
+  - Group Policy Creator Owners
+  - Guests
+  - Hyper-V Administrators
+  - IIS_IUSRS
+  - Incoming Forest Trust Builders
+  - Key Admins
+  - Network Configuration Operators
+  - Performance Log Users
+  - Performance Monitor Users
+  - Pre-Windows 2000 Compatible Access
+  - Print Operators
+  - Protected Users
+  - RAS and IAS Servers
+  - RDS Endpoint Servers
+  - RDS Management Servers
+  - RDS Remote Access Servers
+  - Read-only Domain Controllers
+  - Remote Desktop Users
+  - Remote Management Users
+  - Replicator
+  - Schema Admins
+  - Server Operators
+  - Storage Replica Administrators
+  - Terminal Server License Servers
+  - Users
+  - Windows Authorization Access Group
+  # Special identity groups
+  - Anonymous Logon
+  - Attested Key Property
+  - Authenticated Users
+  - Authentication Authority Asserted Identity
+  - Batch
+  - Console Logon
+  - Creator Group
+  - Creator Owner
+  - Dialup
+  - Digest Authentication
+  - Enterprise Domain Controllers
+  - Enterprise Read-only Domain Controllers
+  - Everyone
+  - Fresh public key identity
+  - Interactive
+  - IUSR
+  - Key Trust
+  - Local Service
+  - System
+  - MFA Key Property
+  - Network
+  - Network Service
+  - NTLM Authentication
+  - Other Organization
+  - Owner Rights
+  - Proxy
+  - Read-only Domain Controllers
+  - Remote Interactive Logon
+  - Restricted
+  - SChannel Authentication
+  - Service
+  - Service Asserted Identity
+  - Terminal Server User
+  - This Organization

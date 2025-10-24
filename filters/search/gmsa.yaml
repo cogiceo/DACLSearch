@@ -1,0 +1,10 @@
+title: Read GMSA Password
+include_access_masks:
+  - Generic All
+include_target_object_classes:
+  - msDS-GroupManagedServiceAccount
+include_object_types:
+  - ms-DS-ManagedPassword
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false

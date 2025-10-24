@@ -1,0 +1,6 @@
+title: Reanimate Tombstones
+include_object_types:
+  - Reanimate-Tombstones
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false

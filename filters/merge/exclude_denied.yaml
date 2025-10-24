@@ -1,0 +1,5 @@
+title: Exclude denied access types
+merge: true
+exclude_ace_types:
+  - Denied
+  - Denied Object

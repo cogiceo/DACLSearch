@@ -1,0 +1,6 @@
+title: Write Owner
+include_access_masks:
+  - Write Owner
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false

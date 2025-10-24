@@ -1,0 +1,9 @@
+title: Allowed to DCSync
+include_access_masks:
+  - Extended Right
+include_object_types:
+  - DS-Replication-Get-Changes
+  - DS-Replication-Get-Changes-All
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false

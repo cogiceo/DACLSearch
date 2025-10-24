@@ -1,0 +1,9 @@
+title: Write on 'altSecurityIdentities' (ESC14)
+include_access_masks:
+  - Write Prop
+include_object_types:
+  - Alt-Security-Identities
+  - Public-Information
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false

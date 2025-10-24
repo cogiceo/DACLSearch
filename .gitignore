@@ -1,0 +1,9 @@
+.vscode/
+refs/
+**__pycache__**
+*.egg-info
+build/
+*.sqlite
+*.db
+*.json
+tests

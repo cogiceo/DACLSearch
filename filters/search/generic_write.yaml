@@ -1,0 +1,6 @@
+title: Generic Write
+include_access_masks:
+  - Generic Write
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false

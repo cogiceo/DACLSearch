@@ -1,0 +1,11 @@
+title: Add self to group
+include_access_masks:
+  - Self
+include_target_object_classes:
+  - group
+include_object_types:
+  - Self-Membership
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false
+include_self_rights: false

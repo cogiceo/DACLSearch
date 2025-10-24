@@ -1,0 +1,14 @@
+title: Read LAPS password
+include_access_masks:
+  - Read Prop
+  - Extended Right
+include_target_object_classes:
+  - computer
+include_object_types:
+  - ms-LAPS-Password
+  - ms-LAPS-EncryptedPassword
+  - ms-Mcs-AdmPwd
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false
+include_self_rights: false

@@ -1,0 +1,7 @@
+title: Write any property
+include_access_masks:
+  - Write Prop
+exclude_ace_flags:
+  - Inherit Only
+include_self_rights: false
+ownership_search: false

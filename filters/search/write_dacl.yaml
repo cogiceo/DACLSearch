@@ -1,0 +1,6 @@
+title: Write DACL
+include_access_masks:
+  - Write Dacl
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false

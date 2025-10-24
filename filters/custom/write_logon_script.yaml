@@ -1,0 +1,8 @@
+title: Write on 'ScriptPath' attribut
+include_object_types:
+  - Script-Path
+include_access_masks:
+  - Write Prop
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false
