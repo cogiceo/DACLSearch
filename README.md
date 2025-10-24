@@ -2,6 +2,8 @@
 
 **DACLSearch** is a tool designed to exhaustively retrieve the **Access Control Entries (ACEs)** that principals have on any Active Directory objects.
 
+https://github.com/user-attachments/assets/3cae0680-02c9-46fa-8eee-7e35bbe1d382
+
 ---
 
 ## Installation
