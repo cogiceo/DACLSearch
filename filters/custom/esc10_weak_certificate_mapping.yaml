@@ -1,0 +1,9 @@
+title: Weak certificate mapping (ESC10)
+include_access_masks:
+  - Write Prop
+include_object_types:
+  - User-Principal-Name
+  - Public-Information
+exclude_ace_flags:
+  - Inherit Only
+ownership_search: false
