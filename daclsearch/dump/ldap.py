@@ -6,7 +6,7 @@ from rich.spinner import Spinner
 from rich.console import Console
 from winacl.dtyp.sid import SID
 from impacket.ldap.ldap import LDAPConnection, LDAPSearchError
-from impacket.ldap.ldapasn1 import SearchResultEntry, SDFlagsControl, SimplePagedResultsControl, Control
+from impacket.ldap.ldapasn1 import SearchResultEntry, SDFlagsControl, SimplePagedResultsControl, Control, Scope
 
 
 class LdapUtils:
@@ -41,7 +41,6 @@ class LdapUtils:
         self.phantom_root_control["controlType"] = "1.2.840.113556.1.4.1340"
 
         base_dn = ",".join(f"DC={part}" for part in domain.split("."))
-        forest_root_dn = ",".join(f"DC={part}" for part in domain.split(".")[-2:])
 
         # Naming Contexts
         self.search_dn = [
@@ -51,7 +50,9 @@ class LdapUtils:
         # Application Naming Contexts
         if not self.__gc_flag:
             self.search_dn.append(f"DC=DomainDnsZones,{base_dn}")
-            self.search_dn.append(f"DC=ForestDnsZones,{forest_root_dn}")
+            forest_root_dn = self.get_forest_root_dn(base_dn)
+            if forest_root_dn:
+                self.search_dn.append(f"DC=ForestDnsZones,{forest_root_dn}")
 
         # Attributes to encode in base64
         self.force_b64 = ["objectGUID", "rightsGuid", "schemaIDGUID"]
@@ -92,6 +93,27 @@ class LdapUtils:
         else:
             ldap_conn.login(self.__username, self.__password, self.__logon_domain, self.__lmhash, self.__nthash)
         return ldap_conn
+
+    def get_forest_root_dn(self, base_dn):
+        """
+        Get the DN of the forest root LDAP server.
+        """
+        ldap_conn = self.get_ldap_connection(base_dn)
+        try:
+            # LDAP query
+            result = ldap_conn.search(
+                searchBase="",
+                scope=Scope("baseObject"),
+                attributes=["rootDomainNamingContext"],
+            )
+            for raw_entry in result:
+                if isinstance(raw_entry, SearchResultEntry):
+                    for attr in raw_entry["attributes"]:
+                        return str(attr["vals"][0])
+        except LDAPSearchError as e:
+            logging.error(f"Search failed on {base_dn}: {e}")
+
+        return None
 
     def dump(self, full):
         """
