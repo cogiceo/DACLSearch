@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from winacl.dtyp.ace import ADS_ACCESS_MASK, AceFlags
+from winacl.dtyp.ace import ACCESS_MASK, ADS_ACCESS_MASK, AceFlags
 from daclsearch.utils import MASK, MASK_INV, ACE_FLAG, ACE_FLAG_INV
 
 
@@ -65,8 +65,10 @@ class DACLSearch:
         masks = [row["mask"] for row in c.fetchall()]
         access_masks = set()
         for mask in masks:
-            mask = ADS_ACCESS_MASK(mask).name
-            rights = mask.split("|")
+            mask_name = ADS_ACCESS_MASK(mask).name
+            if mask_name is None:
+                mask_name = ACCESS_MASK(mask).name
+            rights = mask_name.split("|")
             for right in rights:
                 if right in MASK_INV:
                     access_masks.add(MASK_INV[right])
@@ -432,6 +434,8 @@ class DACLSearch:
                     if map is MASK:
                         # Convert to mask int using winacl constants if available
                         result.append(ADS_ACCESS_MASK[map[v]].value)
+                        if ADS_ACCESS_MASK[map[v]].name in list(ACCESS_MASK.__members__):
+                            result.append(ACCESS_MASK[map[v]].value)
                     elif map is ACE_FLAG:
                         result.append(AceFlags[map[v]].value)
             return result

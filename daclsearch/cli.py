@@ -14,7 +14,7 @@ from InquirerPy.base import Choice
 from InquirerPy.separator import Separator
 from InquirerPy.prompts import FilePathPrompt
 
-from winacl.dtyp.ace import ADS_ACCESS_MASK
+from winacl.dtyp.ace import ACCESS_MASK, ADS_ACCESS_MASK
 
 from daclsearch.search import DACLSearch
 from daclsearch.utils import MASK_INV
@@ -39,6 +39,16 @@ class DACLSearchCLI:
     }
 
     INV_FILTERS = {v: k for k, v in FILTERS.items()}
+
+    mask_entries = [(name, getattr(ADS_ACCESS_MASK, name)) for name in ADS_ACCESS_MASK.__members__]
+    mask_entries.extend([(name, getattr(ACCESS_MASK, name)) for name in ACCESS_MASK.__members__])
+
+    # Sort by number of bits set (descending)
+    MASK_ENTRIES = sorted(
+        mask_entries,
+        key=lambda item: bin(item[1].value).count("1"),
+        reverse=True,
+    )
 
     def __init__(self, db_path, no_builtin_filters):
         """
@@ -319,18 +329,8 @@ class DACLSearchCLI:
                 for ace in ace_list:
                     rights = []
                     mask_value = ace.get("Access Mask", 0)
-                    mask_names = [name for name in ADS_ACCESS_MASK.__members__]
-
-                    # Sort mask names by number of bits set (descending)
-                    mask_names_sorted = sorted(
-                        mask_names,
-                        key=lambda n: bin(getattr(ADS_ACCESS_MASK, n).value).count("1"),
-                        reverse=True,
-                    )
-
                     # Return only the highest matching rights
-                    for name in mask_names_sorted:
-                        mask_enum = getattr(ADS_ACCESS_MASK, name)
+                    for name, mask_enum in self.MASK_ENTRIES:
                         if mask_enum.value != 0 and (mask_value & mask_enum.value) == mask_enum.value:
                             rights.append(name)
                             mask_value &= ~mask_enum.value
