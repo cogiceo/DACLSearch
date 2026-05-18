@@ -1,0 +1,34 @@
+[project]
+name = "daclsearch"
+version = "1.0.0"
+description = "Exhaustive search and flexible filtering of Active Directory ACEs"
+authors = [
+    {name = "Maxime AWOUKOU"}
+]
+readme = "README.md"
+requires-python = ">=3.10,<4.0"
+license = { text = "GPL-3.0-or-later" }
+
+dependencies = [
+    "impacket>=0.12.0",
+    "rich>=14.0.0",
+    "PyYAML>=6.0.3",
+    "winacl>=0.1.9",
+    "InquirerPy>=0.3.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/cogiceo/daclsearch"
+Repository = "https://github.com/cogiceo/daclsearch"
+
+[project.scripts]
+daclsearch = "daclsearch:main"
+
+[tool.poetry]
+exclude = []
+include = [{ path = "filters/**/*.yaml", format = ["sdist", "wheel"] }]
+packages = [{ include = "daclsearch" }]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
