@@ -129,7 +129,7 @@ class LdapUtils:
                 "sAMAccountName",
                 "name",
                 "objectSid",
-                "memberOf",
+                "member",
                 "nTSecurityDescriptor",
                 "defaultSecurityDescriptor",
                 "msDS-GroupMSAMembership",

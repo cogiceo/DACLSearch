@@ -267,28 +267,27 @@ def ldap_dict_to_db(ldap_dict, db_path="daclsearch.sqlite"):
             obj_id = object_dn_to_id.get(dn)
             nt_sd = obj.get("nTSecurityDescriptor")
             gmsa_sd = obj.get("msDS-GroupMSAMembership")
+            primary_group_id = obj.get("primaryGroupID")
+            members = obj.get("member", [])
 
-            # Insert memberships for each principals
-            if "sAMAccountName" in obj_data.get("attributes", []):
-                member_of = obj.get("memberOf", [])
-                if isinstance(member_of, str):
-                    member_of = [member_of]
+            # Insert default group for each principals
+            if primary_group_id:
+                obj_domain_sid = obj.get("objectSid").rsplit("-", 1)[0]
+                primary_group_sid = f"{obj_domain_sid}-{primary_group_id}"
+                pg_id = object_sid_to_id.get(primary_group_sid)
+                c.execute(
+                    "INSERT OR IGNORE INTO memberships (principal_id, group_id) VALUES (?, ?)", (obj_id, pg_id)
+                )
 
-                primary_group_id = obj.get("primaryGroupID")
-                for group_dn in member_of:
-                    group_id = object_dn_to_id.get(group_dn)
-                    if obj_id and group_id:
+            # Insert memberships of groups
+            if members:
+                for member_dn in members:
+                    member_id = object_dn_to_id.get(member_dn)
+                    if obj_id and member_id:
                         c.execute(
                             "INSERT OR IGNORE INTO memberships (principal_id, group_id) VALUES (?, ?)",
-                            (obj_id, group_id),
+                            (member_id, obj_id),
                         )
-                if primary_group_id:
-                    obj_domain_sid = obj.get("objectSid").rsplit("-", 1)[0]
-                    primary_group_sid = f"{obj_domain_sid}-{primary_group_id}"
-                    pg_id = object_sid_to_id.get(primary_group_sid)
-                    c.execute(
-                        "INSERT OR IGNORE INTO memberships (principal_id, group_id) VALUES (?, ?)", (obj_id, pg_id)
-                    )
 
             for b64_sd in [nt_sd, gmsa_sd]:
                 if b64_sd and obj_id:
