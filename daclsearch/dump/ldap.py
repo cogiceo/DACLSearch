@@ -206,6 +206,8 @@ class LdapUtils:
                             if attr_type == "objectSid":
                                 sid = str(SID().from_bytes(base64.b64decode(values[0])))
                                 entry[attr_type] = sid
+                            elif attr_type == "member":
+                                entry[attr_type] = values
                             else:
                                 entry[attr_type] = values if len(values) > 1 else values[0]  # flatten if single value
 
