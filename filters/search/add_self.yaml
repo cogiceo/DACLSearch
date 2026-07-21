@@ -4,7 +4,7 @@ include_access_masks:
 include_target_object_classes:
   - group
 include_object_types:
-  - Self-Membership
+  - Member
 exclude_ace_flags:
   - Inherit Only
 ownership_search: false
