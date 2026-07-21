@@ -2,11 +2,11 @@ title: Validated Writes
 include_access_masks:
   - Self
 include_object_types:
-  - Self-Membership
-  - Validated-SPN
-  - Validated-DNS-Host-Name
-  - Validated-MS-DS-Additional-DNS-Host-Name
-  - Validated-MS-DS-Behavior-Version
+  - Member
+  - Service-Principal-Name
+  - DNS-Host-Name
+  - ms-DS-Additional-Dns-Host-Name
+  - ms-DS-Behavior-Version
 exclude_ace_flags:
   - Inherit Only
 ownership_search: false
